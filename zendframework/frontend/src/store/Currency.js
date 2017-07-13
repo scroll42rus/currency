@@ -10,7 +10,7 @@ class CurrencyStore {
     }
 
     async getCurrencyList (onSuccess, onFailure) {
-        await axios.get('http://localhost/api/currency').then(response => {
+        await axios.get('http://46.181.255.228:8000/api/currency').then(response => {
             this.state.currencyList = response.data
             this.state.error = ''
 
@@ -27,7 +27,7 @@ class CurrencyStore {
     }
 
     async updateCurrency (onSuccess, onFailure) {
-        await axios.post('http://localhost/api/currency').then(response => {
+        await axios.post('http://46.181.255.228:8000/api/currency').then(response => {
             this.state.currencyList = response.data
             this.state.error = ''
 

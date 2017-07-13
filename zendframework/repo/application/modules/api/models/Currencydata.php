@@ -79,7 +79,7 @@ class Api_Model_Currencydata
 
     public function setCreateDate($create_date)
     {
-        $this->_create_date = $create_date->format('Y-m-d H:m:s');
+        $this->_create_date = $create_date->format('Y-m-d H:i:s');
         return $this;
     }
 

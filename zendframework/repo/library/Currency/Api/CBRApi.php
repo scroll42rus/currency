@@ -33,9 +33,11 @@ class Currency_Api_CBRApi implements Currency_ICurrencyApi {
         {
             $currencyinfo = $this->getCurrencyInfo($record, $currencyinfo_mapper);
 
+            $value = floatval(str_replace(',', '.', $record['Value']));
+
             $currencydata = new Api_Model_Currencydata();
             $currencydata->setInfo($currencyinfo)
-                         ->setValue(str_replace(',', '.', $record['Value']))
+                         ->setValue($value / intval($record['Nominal']))
                          ->setCreateDate($current_time);
 
             $currencydata_mapper->save($currencydata);

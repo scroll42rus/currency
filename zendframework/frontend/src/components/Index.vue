@@ -66,6 +66,7 @@ export default {
     data () {
         return {
             filtered: [],
+            filter: '',
             store: CurrencyStore.state,
             loading: false,
             hiddenValues: [],
@@ -77,12 +78,15 @@ export default {
     },
     methods: {
         changed (e) {
-            let value = e.target.value.toLowerCase()
+            this.filter = e.target.value.toLowerCase()
 
+            this.applyFilter()
+        },
+        applyFilter () {
             this.filtered = CurrencyStore.state.currencyList.filter(val => {
-                return val.info.name.toLowerCase().indexOf(value) !== -1 ||
-                        val.info.code.toLowerCase().indexOf(value) !== -1 ||
-                        val.value.indexOf(value) !== -1
+                return val.info.name.toLowerCase().indexOf(this.filter) !== -1 ||
+                        val.info.code.toLowerCase().indexOf(this.filter) !== -1 ||
+                        val.value.indexOf(this.filter) !== -1
             })
         },
         update () {
@@ -97,7 +101,8 @@ export default {
         },
         onSuccess () {
             this.loading = false
-            this.filtered = CurrencyStore.state.currencyList
+            // this.filtered = CurrencyStore.state.currencyList
+            this.applyFilter()
         },
         onFailure () {
             this.loading = false
