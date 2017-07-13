@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  zf:
+    build: ./zendframework
+    ports:
+      - "8000:80"
+    volumes:
+      - ./zendframework/repo:/app
+      - ./zendframework/sites-available:/etc/apache2/sites-available
+      - ./zendframework/sites-available:/etc/apache2/sites-enabled
+      - ./zendframework/apache2.conf:/etc/apache2/apache2.conf:ro
+
+  pg:
+    image: postgres:alpine
+    environment:
+      POSTGRES_PASSWORD: passwd
+    ports:
+      - 5432:5432
+
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
